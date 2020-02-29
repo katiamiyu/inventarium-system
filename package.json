@@ -1,0 +1,41 @@
+{
+  "name": "inventarium-system",
+  "version": "1.0.0",
+  "description": "A system for managing inventories",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katiamiyu/inventarium-system.git"
+  },
+  "keywords": [
+    "inventory",
+    "inventarium",
+    "system",
+    "management"
+  ],
+  "author": "katiamiyu, james",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/katiamiyu/inventarium-system/issues"
+  },
+  "homepage": "https://github.com/katiamiyu/inventarium-system#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mocha": "^7.1.0",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "babel-register": "^6.26.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1"
+  }
+}
