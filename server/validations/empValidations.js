@@ -17,7 +17,7 @@ const empValidations = [
   check('deptId', 'Department id is required')
     .not().isEmpty()
     .isNumeric()
-    .withMessage('Should be a number')
+    .withMessage('Mobile should be a number')
     .trim()
     .escape(),
 ];
