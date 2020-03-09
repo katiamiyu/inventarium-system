@@ -104,6 +104,20 @@ describe('Test on employee endpoints', () => {
           done();
         });
     });
-    // end of create end point.
+    // end of create employee end-point.
+  });
+  describe('Get all employees endpoint', () => {
+    it('should retrieve all available employees', (done) => {
+      request(app)
+        .get('/api/v1/employees')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('employees retrieved successfully');
+          done();
+        });
+    });
+    // end of get all employees end-point
   });
 });
