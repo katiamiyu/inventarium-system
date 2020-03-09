@@ -118,6 +118,28 @@ describe('Test on employee endpoints', () => {
           done();
         });
     });
+    it('should retrieve employee by id', (done) => {
+      request(app)
+        .get('/api/v1/employees/1')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('employee(s) retrieved successfully');
+          done();
+        });
+    });
+    it('should check for valid employee id', (done) => {
+      request(app)
+        .get('/api/v1/employees/one')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('invalid id');
+          done();
+        });
+    });
     // end of get all employees end-point
   });
 });
