@@ -1,1 +1,1 @@
-// function to test each dept endpoint route
+// function to test each dept endpoint route.

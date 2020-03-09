@@ -1,7 +1,7 @@
 import Express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import deptRoutes from './server/routes/deptRouter';
+import empRoutes from './server/routes/empRouter';
 
 dotenv.config();
 
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-deptRoutes(app);
+empRoutes(app);
 
 // declare 404 route
 app.all('*', (req, res) => res.status(404).json({
