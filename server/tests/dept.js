@@ -36,5 +36,17 @@ describe('Test on department endpoints', () => {
     });
     // end of create department end-point.
   });
-
+  describe('Get all employees endpoint', () => {
+    it('should retrieve all available department', (done) => {
+      request(app)
+        .get('/api/v1/depts')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('department retrieved successfully');
+          done();
+        });
+    });
+});
 });

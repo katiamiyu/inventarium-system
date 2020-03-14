@@ -12,6 +12,9 @@ class deptController {
         };
         queryController.dbQuery(res, queryString, 'department created successfully', '');
       }
+      static getAll(req, res) {
+        queryController.dbQuery(res, 'SELECT * FROM department', 'department retrieved successfully', '');
+      }
 }
 
 export default deptController;
