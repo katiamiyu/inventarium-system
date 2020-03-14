@@ -77,6 +77,37 @@ describe('Get department by id endpoint', () => {
       });
  // end of get department by id end-point
 });
+describe('Update department endpoint', () => {
+    // update department
+    it('should update department record', (done) => {
+        request(app)
+          .put('/api/v1/depts/1')
+          .send({
+            deptName: 'Human resource',
+          })
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(201)
+          .end((err, res) => {
+            expect(res.body.message).to.equal('department updated successfully');
+            done();
+          });
+      });
+      it('should update department record', (done) => {
+        request(app)
+          .put('/api/v1/depts/2')
+          .send({
+            deptName: 'Human resource',
+          })
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end((err, res) => {
+            expect(res.body.message).to.equal('department not found');
+            done();
+          });
+      });
+  });
 describe('remove department endpoint', () => {
     it('should check for valid department id', (done) => {
       request(app)

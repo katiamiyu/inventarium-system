@@ -1,7 +1,7 @@
 import { check } from 'express-validator';
 
 const deptValidations = [
-  check('deptName', 'Employee name is required')
+  check('deptName', 'department name is required')
     .not()
     .isEmpty()
     .trim()
