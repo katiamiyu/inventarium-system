@@ -1,9 +1,9 @@
 const checkId = id => {
-    const id = parseInt(req.params.id, 10);
-    if (isNaN(id)) {
+    const newId = parseInt(id, 10);
+    if (isNaN(newId)) {
       return 0;
     }
-    return id;
+    return newId;
     }
 
 

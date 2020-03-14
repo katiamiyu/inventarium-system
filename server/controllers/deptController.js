@@ -15,6 +15,15 @@ class deptController {
       static getAll(req, res) {
         queryController.dbQuery(res, 'SELECT * FROM department', 'department retrieved successfully', '');
       }
+      static getById(req, res) {
+        const id = checkId(req.params.id);
+        if (id === 0) return queryController.notFoundError(res, 'invalid id');
+        const queryString = {
+          text: 'SELECT * FROM department WHERE dept_id = $1',
+          values: [id],
+        };
+        queryController.dbQuery(res, queryString, 'department retrieved successfully', 'department not found');
+      }
 }
 
 export default deptController;

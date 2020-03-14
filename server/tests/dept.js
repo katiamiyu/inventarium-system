@@ -36,7 +36,8 @@ describe('Test on department endpoints', () => {
     });
     // end of create department end-point.
   });
-  describe('Get all employees endpoint', () => {
+  describe('Get all department endpoint', () => {
+       // get all department
     it('should retrieve all available department', (done) => {
       request(app)
         .get('/api/v1/depts')
@@ -48,5 +49,32 @@ describe('Test on department endpoints', () => {
           done();
         });
     });
+    // end of get all department end-point
+});
+describe('Get department by id endpoint', () => {
+    // get department by id
+    it('should retrieve department by id', (done) => {
+        request(app)
+          .get('/api/v1/depts/1')
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(201)
+          .end((err, res) => {
+            expect(res.body.message).to.equal('department retrieved successfully');
+            done();
+          });
+      });
+      it('should check for valid department id', (done) => {
+        request(app)
+          .get('/api/v1/depts/one')
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(201)
+          .end((err, res) => {
+            expect(res.body.message).to.equal('invalid id');
+            done();
+          });
+      });
+ // end of get department by id end-point
 });
 });
