@@ -24,6 +24,16 @@ class deptController {
         };
         queryController.dbQuery(res, queryString, 'department retrieved successfully', 'department not found');
       }
+
+      static remove(req, res) {
+        const id = checkId(req);
+        if (id === 0) return queryController.notFoundError(res, 'invalid id');
+        const query = {
+          text: 'DELETE FROM department WHERE dept_id = $1',
+          values: [id],
+        };
+        queryController.dbQuery(res, query, 'department removed successfully', 'department not found');
+      }
 }
 
 export default deptController;

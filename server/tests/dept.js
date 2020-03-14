@@ -77,4 +77,29 @@ describe('Get department by id endpoint', () => {
       });
  // end of get department by id end-point
 });
+describe('remove department endpoint', () => {
+    it('should check for valid department id', (done) => {
+      request(app)
+        .delete('/api/v1/depts/one')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('invalid id');
+          done();
+        });
+    });
+    it('should remove department by id', (done) => {
+      request(app)
+        .delete('/api/v1/depts/1')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('department removed successfully');
+          done();
+        });
+    });
+    // end of remove department by id end-point
+  });
 });
