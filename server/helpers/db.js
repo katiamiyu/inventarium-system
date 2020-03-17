@@ -43,7 +43,7 @@ class queryController {
   static serverError(response, error) {
     return response.status(500).json({
       status: 500,
-      message: `Server error ${error}`,
+      message: error,
     });
   }
 
@@ -69,3 +69,4 @@ class queryController {
 }
 
 export { queryController, client };
+

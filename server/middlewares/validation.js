@@ -1,8 +1,5 @@
 import { validationResult } from 'express-validator';
-import conn from '../helpers/conn';
 
-const client = conn();
-client.connect();
 /**
  *    @fileOverview Class to validate request
  *    @class Validator
