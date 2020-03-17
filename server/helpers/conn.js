@@ -1,18 +1,16 @@
-// setup database url after checking for environment
 import dotenv from 'dotenv';
 import { Client } from 'pg';
-import setup from '../config/config';
 
 dotenv.config();
 const connection = () => {
   let config;
 
   if (process.env.NODE_ENV === 'test') {
-    config = setup.test.dbTestUrl;
+    config = process.env.DATABASE_URL;
   } else if (process.env.NODE_ENV === 'production') {
-    config = setup.production.DATABASE_URL;
+    config = process.env.DATABASE_URL;
   } else {
-    config = setup.development.dbUrl;
+    config = process.env.DATABASE_URL;
   }
 
   const client = new Client(config);
