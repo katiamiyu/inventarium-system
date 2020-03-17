@@ -1,14 +1,7 @@
 import { queryController, client } from '../helpers/db';
+import checkId from '../helpers/general';
 
 class EmpController {
-  static checkId(req) {
-    const id = parseInt(req.params.id, 10);
-    if (isNaN(id)) {
-      return 0;
-    }
-    return id;
-  }
-
   static create(req, res) {
     const { empName, mobile, deptId } = req.body;
     const queryString = {
@@ -25,7 +18,7 @@ class EmpController {
   }
 
   static getById(req, res) {
-    const id = EmpController.checkId(req);
+    const id = checkId(req.params.id);
     if (id === 0) return queryController.notFoundError(res, 'invalid id');
     const queryString = {
       text: 'SELECT * FROM employees WHERE emp_id = $1',
@@ -35,7 +28,7 @@ class EmpController {
   }
 
   static edit(req, res) {
-    const id = EmpController.checkId(req);
+    const id = checkId(req.params.id);
     if (id === 0) return queryController.notFoundError(res, 'invalid id');
     const findQuery = {
       text: 'SELECT * FROM employees WHERE emp_id = $1',
@@ -56,12 +49,12 @@ class EmpController {
           req.body.deptId || rows[0].dept_id, id,
         ],
       };
-      client.query(updateQuery).then((response) => queryController.getSuccess(res, 200, response, 'employee updated successfully'));
+      queryController.dbQuery(res, updateQuery, 'employee updated successfully');
     });
   }
 
   static remove(req, res) {
-    const id = EmpController.checkId(req);
+    const id = checkId(req.params.id);
     if (id === 0) return queryController.notFoundError(res, 'invalid id');
     const query = {
       text: 'DELETE FROM employees WHERE emp_id = $1',
