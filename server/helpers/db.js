@@ -69,3 +69,4 @@ class queryController {
 }
 
 export { queryController, client };
+
