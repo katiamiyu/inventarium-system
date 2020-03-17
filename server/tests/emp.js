@@ -160,6 +160,22 @@ describe('Test on employee endpoints', () => {
           done();
         });
     });
+    it('should check if employee exist', (done) => {
+      request(app)
+        .put('/api/v1/employees/100')
+        .send({
+          empName: 'Adebayo tiamiyu',
+          mobile: '8177221305',
+          deptId: 6,
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('employee not found');
+          done();
+        });
+    });
     // check for emp name
     it('should check for employee name', (done) => {
       request(app)
