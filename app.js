@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import empRoutes from './server/routes/empRouter';
 import deptRoutes from './server/routes/deptRouter';
+import itemRoutes from './server/routes/itemRouter';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 
 empRoutes(app);
 deptRoutes(app);
+itemRoutes(app);
 
 // declare 404 route
 app.all('*', (req, res) => res.status(404).json({

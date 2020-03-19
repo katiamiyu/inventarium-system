@@ -5,8 +5,8 @@ const createUserTable = `
     role VARCHAR(10),
     password VARCHAR(20) NOT NULL,
     hint VARCHAR(20),
-    created_on TIMESTAMP WITH TIME ZONE DEFAULT now(),
-    updated_on TIMESTAMP WITH TIME ZONE,
+    created_on TIMESTAMP,
+    updated_on TIMESTAMP,
     last_updated_by VARCHAR(50)
   );
 `;
@@ -35,8 +35,8 @@ const createItemsTable = `
     init_quant INTEGER NOT NULL,
     isreturnable BOOLEAN NOT NULL,
     avail_quant INTEGER NOT NULL,
-    created_on TIMESTAMP WITH TIME ZONE DEFAULT now(),
-    updated_on TIMESTAMP WITH TIME ZONE
+    created_on TIMESTAMP,
+    updated_on TIMESTAMP
   );
 `;
 const createRequestsTable = `
@@ -46,8 +46,8 @@ const createRequestsTable = `
     emp_id INTEGER NOT NULL,
     isreturnable BOOLEAN NOT NULL,
     status VARCHAR(10),
-    created_on TIMESTAMP WITH TIME ZONE DEFAULT now(),
-    updated_on TIMESTAMP WITH TIME ZONE
+    created_on TIMESTAMP,
+    updated_on TIMESTAMP
   );
 `;
 const createQuery = `${createUserTable}${createEmployeeTable}${createDepartmentTable}${createItemsTable}${createRequestsTable}`;
