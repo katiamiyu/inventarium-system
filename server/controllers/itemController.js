@@ -13,6 +13,10 @@ class itemController {
     };
     queryController.dbQuery(res, queryString, 'items created successfully');
   }
+
+  static getAll(req, res) {
+    queryController.dbQuery(res, 'SELECT * FROM items', 'items retrieved successfully');
+  }
 }
 
 export default itemController;

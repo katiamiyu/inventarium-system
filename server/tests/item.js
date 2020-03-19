@@ -174,4 +174,19 @@ describe('Test on items endpoints', () => {
     });
     // end of create item end-point.
   });
+  describe('Get all items endpoint', () => {
+    // get all items
+    it('should retrieve all available items', (done) => {
+      request(app)
+        .get('/api/v1/items')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('items retrieved successfully');
+          done();
+        });
+    });
+    // end of get all items end-point
+  });
 });
