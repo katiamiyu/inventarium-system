@@ -5,6 +5,7 @@ import itemController from '../controllers/itemController';
 const routes = (app) => {
   app.post('/api/v1/items', itemValidations, validator.validatorError, itemController.create);
   app.get('/api/v1/items', itemController.getAll);
+  app.get('/api/v1/items/:id', itemController.getById);
 };
 
 export default routes;

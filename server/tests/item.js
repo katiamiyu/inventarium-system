@@ -5,7 +5,7 @@ import app from '../../app';
 const { expect } = chai;
 describe('Test on items endpoints', () => {
   describe('Create items endpoint', () => {
-    // create department
+    // create items
     it('should create item record', (done) => {
       request(app)
         .post('/api/v1/items')
@@ -188,5 +188,31 @@ describe('Test on items endpoints', () => {
         });
     });
     // end of get all items end-point
+  });
+  describe('Get item by id endpoint', () => {
+    // get items by id
+    it('should retrieve item by id', (done) => {
+      request(app)
+        .get('/api/v1/items/1')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('item retrieved successfully');
+          done();
+        });
+    });
+    it('should check for valid item id', (done) => {
+      request(app)
+        .get('/api/v1/items/one')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('invalid id');
+          done();
+        });
+    });
+    // end of get items by id end-point
   });
 });

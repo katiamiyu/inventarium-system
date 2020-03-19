@@ -1,4 +1,5 @@
 import { queryController } from '../helpers/db';
+import checkId from '../helpers/general';
 
 class itemController {
   static create(req, res) {
@@ -16,6 +17,16 @@ class itemController {
 
   static getAll(req, res) {
     queryController.dbQuery(res, 'SELECT * FROM items', 'items retrieved successfully');
+  }
+
+  static getById(req, res) {
+    const id = checkId(req.params.id);
+    if (!id) return queryController.notFoundError(res, 'invalid id');
+    const queryString = {
+      text: 'SELECT * FROM items WHERE item_id = $1',
+      values: [id],
+    };
+    queryController.dbQuery(res, queryString, 'item retrieved successfully', 'item not found');
   }
 }
 
