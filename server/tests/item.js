@@ -215,6 +215,45 @@ describe('Test on items endpoints', () => {
     });
     // end of get items by id end-point
   });
+  describe('Update item endpoint', () => {
+    // update item
+    it('should update item record', (done) => {
+      request(app)
+        .put('/api/v1/items/1')
+        .send({
+          itemName: 'Book',
+          itemDesc: 'A nice book',
+          initQty: 7,
+          isReturnable: true,
+          availableQty: 4,
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('item updated successfully');
+          done();
+        });
+    });
+    it('should update item record', (done) => {
+      request(app)
+        .put('/api/v1/items/2')
+        .send({
+          itemName: 'Marker',
+          itemDesc: 'A nice marker',
+          initQty: 7,
+          isReturnable: true,
+          availableQty: 4,
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('item not found');
+          done();
+        });
+    });
+  });
   describe('remove item endpoint', () => {
     it('should remove item by id', (done) => {
       request(app)
