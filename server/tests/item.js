@@ -215,4 +215,18 @@ describe('Test on items endpoints', () => {
     });
     // end of get items by id end-point
   });
+  describe('remove item endpoint', () => {
+    it('should remove item by id', (done) => {
+      request(app)
+        .delete('/api/v1/items/1')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('item removed successfully');
+          done();
+        });
+    });
+    // end of remove item by id end-point
+  });
 });

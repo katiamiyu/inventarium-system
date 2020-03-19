@@ -28,6 +28,16 @@ class itemController {
     };
     queryController.dbQuery(res, queryString, 'item retrieved successfully', 'item not found');
   }
+
+  static remove(req, res) {
+    const id = checkId(req.params.id);
+    if (!id) return queryController.notFoundError(res, 'invalid id');
+    const query = {
+      text: 'DELETE FROM items WHERE item_id = $1',
+      values: [id],
+    };
+    queryController.dbQuery(res, query, 'item removed successfully', 'item not found');
+  }
 }
 
 export default itemController;
