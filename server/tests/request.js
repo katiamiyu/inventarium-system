@@ -71,5 +71,28 @@ describe('Test on request endpoints', () => {
           done();
         });
     });
+    it('should retrieve requests by id', (done) => {
+      request(app)
+        .get('/api/v1/requests/1')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('request retrieved successfully');
+          done();
+        });
+    });
+    it('should check for valid request id', (done) => {
+      request(app)
+        .get('/api/v1/requests/one')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('invalid id');
+          done();
+        });
+    });
+    // end of get all employees end-point
   });
 });
