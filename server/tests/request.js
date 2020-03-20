@@ -1,0 +1,62 @@
+import request from 'supertest';
+import chai from 'chai';
+import app from '../../app';
+
+const { expect } = chai;
+describe('Test on request endpoints', () => {
+  describe('Create requests endpoint', () => {
+    // place a request
+    it('should place a request', (done) => {
+      request(app)
+        .post('/api/v1/requests')
+        .send({
+          itemId: 1,
+          empId: 1,
+          isReturnable: true,
+          status: 'available',
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('request placed successfully');
+          done();
+        });
+    });
+    // check for item id
+    it('should check for item id', (done) => {
+      request(app)
+        .post('/api/v1/requests')
+        .send({
+          empId: 1,
+          isReturnable: true,
+          status: 'available',
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.errors[0].msg).to.equal('Item id is required');
+          done();
+        });
+    });
+    // check item id is numeric
+    it('should check if item id is numeric', (done) => {
+      request(app)
+        .post('/api/v1/requests')
+        .send({
+          itemId: 'one',
+          empId: 1,
+          isReturnable: true,
+          status: 'available',
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.errors[0].msg).to.equal('Item id is numeric');
+          done();
+        });
+    });
+  });
+});
