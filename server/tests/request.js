@@ -58,5 +58,18 @@ describe('Test on request endpoints', () => {
           done();
         });
     });
+  }); // end of create request endpoint
+  describe('Get all requests endpoint', () => {
+    it('should retrieve all available requests', (done) => {
+      request(app)
+        .get('/api/v1/requests')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('requests retrieved successfully');
+          done();
+        });
+    });
   });
 });
