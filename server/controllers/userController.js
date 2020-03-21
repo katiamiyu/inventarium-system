@@ -9,14 +9,8 @@ class userController {
     let { password, userName } = req.body;
     userName = helper.removeSpecialChar(userName);
     password = helper.hashPassword(password);
-    const queryString = {
-      text:
-        `INSERT INTO users(user_name, role, password, hint, created_on) 
-            VALUES ($1, $2, $3, $4, to_timestamp($5 / 1000.0)) RETURNING *`,
-      values: [userName, role, password, hint, Date.now()],
-    };
-    queryController.dbQuery(res, queryString, 'user created successfully');
-  }
+      userName, role, password, hint,
+    } = req.body;
 
   static getAll(req, res) {
     queryController.dbQuery(res, 'SELECT * FROM users', 'users retrieved successfully', '');
