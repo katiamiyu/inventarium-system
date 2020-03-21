@@ -19,6 +19,18 @@ class queryController {
   }
 
   /**
+   *  return message for non matching password in login or not found
+   *  @param {Object} response
+   *  @return {Object} json
+   */
+  static passwordFailureResponse(response, errorMsg) {
+    return response.status(401).json({
+      status: 401,
+      error: errorMsg,
+    });
+  }
+
+  /**
    *
    *  @param {String} successMsg
    *  @param {Object} response
@@ -31,6 +43,25 @@ class queryController {
       status,
       message: successMsg,
       data: dbresult.rows,
+    });
+  }
+
+  /**
+   *
+   *  @param {String} successMsg
+   *  @param {Object} response
+   *  @param {String} status
+   *  @param {Object} dbresult
+   *  @returns {Object} json
+   */
+  static loginSuccessResponse(response, currentToken, data) {
+    return response.status(200).json({
+      status: 200,
+      data: {
+        id: data.user_id,
+        userName: data.user_name,
+        token: currentToken,
+      },
     });
   }
 
@@ -69,4 +100,3 @@ class queryController {
 }
 
 export { queryController, client };
-

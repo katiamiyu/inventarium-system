@@ -1,12 +1,12 @@
 import { queryController, client } from '../helpers/db';
-import checkId from '../helpers/general';
+import helper from '../helpers/general';
 
 class deptController {
   static create(req, res) {
     const { deptName } = req.body;
     const queryString = {
       text:
-        `INSERT INTO department(dept_name) 
+            `INSERT INTO department(dept_name) 
             VALUES ($1) RETURNING *`,
       values: [deptName],
     };
@@ -14,11 +14,11 @@ class deptController {
   }
 
   static getAll(req, res) {
-    queryController.dbQuery(res, 'SELECT * FROM department', 'department retrieved successfully', '');
+    queryController.dbQuery(res, 'SELECT * FROM department', 'department retrieved successfully');
   }
 
   static getById(req, res) {
-    const id = checkId(req.params.id);
+    const id = helper.checkId(req.params.id);
     if (!id) return queryController.notFoundError(res, 'invalid id');
     const queryString = {
       text: 'SELECT * FROM department WHERE dept_id = $1',
@@ -28,7 +28,7 @@ class deptController {
   }
 
   static edit(req, res) {
-    const id = checkId(req.params.id);
+    const id = helper.checkId(req.params.id);
     if (!id) return queryController.notFoundError(res, 'invalid id');
     const findQuery = {
       text: 'SELECT * FROM department WHERE dept_id = $1',
@@ -54,7 +54,7 @@ class deptController {
   }
 
   static remove(req, res) {
-    const id = checkId(req.params.id);
+    const id = helper.checkId(req.params.id);
     if (!id) return queryController.notFoundError(res, 'invalid id');
     const query = {
       text: 'DELETE FROM department WHERE dept_id = $1',

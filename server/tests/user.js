@@ -73,7 +73,7 @@ describe('Test on user endpoints', () => {
         .expect('Content-Type', /json/)
         .expect(201)
         .end((err, res) => {
-          expect(res.body.errors[0].msg).to.equal('password is required');
+          expect(res.body.errors[0].msg).to.equal('Password should not be empty, minimum eight characters, at least one letter, one number and one special character');
           done();
         });
     });
@@ -137,5 +137,39 @@ describe('Test on user endpoints', () => {
         });
     });
     // end of get user by id end-point
+  });
+  describe('SignIn user endpoint', () => {
+    // SignIn user endpoint
+    it('it should not signin a user with incorrect info', (done) => {
+      request(app)
+        .post('/api/v1/auth/signin')
+        .send({
+          userName: 'crystalwebpro',
+          password: 'testing@51',
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.error).to.equal('username or password is incorrect');
+          done();
+        });
+    });
+    it('it should signin a user with correct and complete information', (done) => {
+      request(app)
+        .post('/api/v1/auth/signin')
+        .send({
+          userName: 'crystalwebpro',
+          password: 'testing@5',
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.data.userName).to.equal('crystalwebpro');
+          done();
+        });
+    });
+    // end of signin user end-point.
   });
 });
