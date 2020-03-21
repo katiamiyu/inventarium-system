@@ -4,9 +4,10 @@ import helper from '../helpers/general';
 class userController {
   static create(req, res) {
     const {
-      role, hint,
+      hint,
     } = req.body;
-    let { password, userName } = req.body;
+    let { password, userName, role } = req.body;
+    role = role.toLowerCase();
     userName = helper.removeSpecialChar(userName);
     password = helper.hashPassword(password);
     const queryString = {

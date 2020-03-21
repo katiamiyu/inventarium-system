@@ -2,16 +2,31 @@ import request from 'supertest';
 import chai from 'chai';
 import app from '../../app';
 
+let currrentToken;
 const { expect } = chai;
+
 describe('Test on user endpoints', () => {
   describe('Create user endpoint', () => {
+    before((done) => {
+      request(app)
+        .post('/api/v1/auth/signin')
+        .send({
+          userName: 'singlecliq',
+          password: 'testing@5234',
+        })
+        .end((error, res) => {
+          currrentToken = res.body.data.token;
+          done();
+        });
+    });
     // create user
     it('should create user record', (done) => {
       request(app)
         .post('/api/v1/auth/signup')
+        .set('token', currrentToken)
         .send({
           userName: 'crystalwebpro',
-          role: 'Admin',
+          role: 'normal',
           password: 'testing@5',
           hint: 'test',
         })
@@ -27,9 +42,10 @@ describe('Test on user endpoints', () => {
     it('should check for user name', (done) => {
       request(app)
         .post('/api/v1/auth/signup')
+        .set('token', currrentToken)
         .send({
           userName: '',
-          role: 'Admin',
+          role: 'normal',
           password: 'testing@5',
           hint: 'test',
         })
@@ -45,6 +61,7 @@ describe('Test on user endpoints', () => {
     it('should check for user role', (done) => {
       request(app)
         .post('/api/v1/auth/signup')
+        .set('token', currrentToken)
         .send({
           userName: 'crystalwebpro',
           role: '',
@@ -63,9 +80,10 @@ describe('Test on user endpoints', () => {
     it('should check for user password', (done) => {
       request(app)
         .post('/api/v1/auth/signup')
+        .set('token', currrentToken)
         .send({
           userName: 'crystalwebpro',
-          role: 'Admin',
+          role: 'normal',
           password: '',
           hint: 'test',
         })
@@ -81,9 +99,10 @@ describe('Test on user endpoints', () => {
     it('should check for user password hint', (done) => {
       request(app)
         .post('/api/v1/auth/signup')
+        .set('token', currrentToken)
         .send({
           userName: 'crystalwebpro',
-          role: 'Admin',
+          role: 'normal',
           password: 'testing@123',
           hint: '',
         })
@@ -102,6 +121,7 @@ describe('Test on user endpoints', () => {
     it('should retrieve all users', (done) => {
       request(app)
         .get('/api/v1/users')
+        .set('token', currrentToken)
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(201)
@@ -117,6 +137,7 @@ describe('Test on user endpoints', () => {
     it('should retrieve user by id', (done) => {
       request(app)
         .get('/api/v1/user/1')
+        .set('token', currrentToken)
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(201)
@@ -128,6 +149,7 @@ describe('Test on user endpoints', () => {
     it('should check for valid item id', (done) => {
       request(app)
         .get('/api/v1/user/one')
+        .set('token', currrentToken)
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(201)

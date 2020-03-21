@@ -20,7 +20,7 @@ describe('Test on department endpoints', () => {
           done();
         });
     });
-    // check for emp name
+    // check for department name
     it('should check for department name', (done) => {
       request(app)
         .post('/api/v1/depts')

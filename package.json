@@ -8,7 +8,7 @@
     "lint": "eslint ./server",
     "start": "babel-node app.js",
     "pretest": "npm run db-migrate",
-    "test": "set NODE_ENV=test&& nyc --reporter=html --reporter=text mocha --require babel-register ./server/tests/ --timeout 10000 --exit",
+    "test": "set NODE_ENV=test&& nyc --reporter=html --reporter=text mocha --require babel-register ./server/tests/ --timeout 15000 --exit",
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "db-migrate": "set NODE_ENV=test&&babel-node server/models/index.js"
