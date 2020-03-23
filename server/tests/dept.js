@@ -20,7 +20,7 @@ describe('Test on department endpoints', () => {
           done();
         });
     });
-    // check for emp name
+    // check for department name
     it('should check for department name', (done) => {
       request(app)
         .post('/api/v1/depts')
@@ -37,7 +37,7 @@ describe('Test on department endpoints', () => {
     // end of create department end-point.
   });
   describe('Get all department endpoint', () => {
-       // get all department
+    // get all department
     it('should retrieve all available department', (done) => {
       request(app)
         .get('/api/v1/depts')
@@ -50,65 +50,65 @@ describe('Test on department endpoints', () => {
         });
     });
     // end of get all department end-point
-});
-describe('Get department by id endpoint', () => {
+  });
+  describe('Get department by id endpoint', () => {
     // get department by id
     it('should retrieve department by id', (done) => {
-        request(app)
-          .get('/api/v1/depts/1')
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(201)
-          .end((err, res) => {
-            expect(res.body.message).to.equal('department retrieved successfully');
-            done();
-          });
-      });
-      it('should check for valid department id', (done) => {
-        request(app)
-          .get('/api/v1/depts/one')
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(201)
-          .end((err, res) => {
-            expect(res.body.message).to.equal('invalid id');
-            done();
-          });
-      });
- // end of get department by id end-point
-});
-describe('Update department endpoint', () => {
+      request(app)
+        .get('/api/v1/depts/1')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('department retrieved successfully');
+          done();
+        });
+    });
+    it('should check for valid department id', (done) => {
+      request(app)
+        .get('/api/v1/depts/one')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('invalid id');
+          done();
+        });
+    });
+    // end of get department by id end-point
+  });
+  describe('Update department endpoint', () => {
     // update department
     it('should update department record', (done) => {
-        request(app)
-          .put('/api/v1/depts/1')
-          .send({
-            deptName: 'Human resource',
-          })
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(201)
-          .end((err, res) => {
-            expect(res.body.message).to.equal('department updated successfully');
-            done();
-          });
-      });
-      it('should update department record', (done) => {
-        request(app)
-          .put('/api/v1/depts/2')
-          .send({
-            deptName: 'Human resource',
-          })
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(200)
-          .end((err, res) => {
-            expect(res.body.message).to.equal('department not found');
-            done();
-          });
-      });
+      request(app)
+        .put('/api/v1/depts/1')
+        .send({
+          deptName: 'Human resource',
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('department updated successfully');
+          done();
+        });
+    });
+    it('should update department record', (done) => {
+      request(app)
+        .put('/api/v1/depts/2')
+        .send({
+          deptName: 'Human resource',
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('department not found');
+          done();
+        });
+    });
   });
-describe('remove department endpoint', () => {
+  describe('remove department endpoint', () => {
     it('should check for valid department id', (done) => {
       request(app)
         .delete('/api/v1/depts/one')

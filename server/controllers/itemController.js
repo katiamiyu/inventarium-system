@@ -1,5 +1,5 @@
 import { queryController, client } from '../helpers/db';
-import checkId from '../helpers/general';
+import helper from '../helpers/general';
 
 class itemController {
   static create(req, res) {
@@ -20,7 +20,7 @@ class itemController {
   }
 
   static getById(req, res) {
-    const id = checkId(req.params.id);
+    const id = helper.checkId(req.params.id);
     if (!id) return queryController.notFoundError(res, 'invalid id');
     const queryString = {
       text: 'SELECT * FROM items WHERE item_id = $1',
@@ -30,7 +30,7 @@ class itemController {
   }
 
   static edit(req, res) {
-    const id = checkId(req.params.id);
+    const id = helper.checkId(req.params.id);
     if (!id) return queryController.notFoundError(res, 'invalid id');
     const findQuery = {
       text: 'SELECT * FROM items WHERE item_id = $1',
@@ -58,7 +58,7 @@ class itemController {
   }
 
   static remove(req, res) {
-    const id = checkId(req.params.id);
+    const id = helper.checkId(req.params.id);
     if (!id) return queryController.notFoundError(res, 'invalid id');
     const query = {
       text: 'DELETE FROM items WHERE item_id = $1',

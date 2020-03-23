@@ -3,7 +3,7 @@ const createUserTable = `
     user_id SERIAL PRIMARY KEY NOT NULL,
     user_name VARCHAR(40) NOT NULL,
     role VARCHAR(10),
-    password VARCHAR(20) NOT NULL,
+    password VARCHAR(100) NOT NULL,
     hint VARCHAR(20),
     created_on TIMESTAMP,
     updated_on TIMESTAMP,
