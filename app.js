@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import empRoutes from './server/routes/empRouter';
 import deptRoutes from './server/routes/deptRouter';
 import requestRoutes from './server/routes/requestRouter';
+import itemRoutes from './server/routes/itemRouter';
+import userRoutes from './server/routes/userRouter';
 
 dotenv.config();
 
@@ -21,6 +23,8 @@ app.use(bodyParser.json());
 empRoutes(app);
 deptRoutes(app);
 requestRoutes(app);
+itemRoutes(app);
+userRoutes(app);
 
 // declare 404 route
 app.all('*', (req, res) => res.status(404).json({
