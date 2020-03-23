@@ -3,7 +3,6 @@ import chai from 'chai';
 import app from '../../app';
 
 const { expect } = chai;
-let id;
 describe('Test on request endpoints', () => {
   describe('Create requests endpoint', () => {
     // place a request
