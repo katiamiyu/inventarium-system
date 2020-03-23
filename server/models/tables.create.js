@@ -45,7 +45,7 @@ const createRequestsTable = `
     item_id INTEGER NOT NULL,
     emp_id INTEGER NOT NULL,
     isreturnable BOOLEAN NOT NULL,
-    status VARCHAR(10),
+    status VARCHAR(15),
     created_on TIMESTAMP WITH TIME ZONE DEFAULT now(),
     updated_on TIMESTAMP WITH TIME ZONE
   );

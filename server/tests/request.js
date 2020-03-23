@@ -3,6 +3,7 @@ import chai from 'chai';
 import app from '../../app';
 
 const { expect } = chai;
+let id;
 describe('Test on request endpoints', () => {
   describe('Create requests endpoint', () => {
     // place a request
@@ -196,7 +197,7 @@ describe('Test on request endpoints', () => {
     });
   });
   describe('Remove requests endpoint', () => {
-    it('should check if request exists', (done) => {
+    it('should remove request if exists', (done) => {
       request(app)
         .delete('/api/v1/requests/1')
         .set('Accept', 'application/json')

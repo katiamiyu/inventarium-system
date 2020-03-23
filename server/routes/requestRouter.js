@@ -7,6 +7,7 @@ const routes = (app) => {
   app.get('/api/v1/requests', reqController.getAll);
   app.get('/api/v1/requests/:id', reqController.getById);
   app.put('/api/v1/requests/:id', reqValidations, validator.validatorError, reqController.edit);
+  app.delete('/api/v1/requests/:id', reqController.remove);
 };
 
 export default routes;
